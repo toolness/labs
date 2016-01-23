@@ -2,6 +2,7 @@ home:
   build: ./test/home
   volumes:
     - .:/labs-ro:ro
+    - ./test/log:/var/log/test
   entrypoint: /labs-ro/test/home/entrypoint.sh
   links:
     - labs
