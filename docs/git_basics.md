@@ -43,3 +43,20 @@ via the git `labs` remote that was set up for us:
     $ git push labs master
     To varmaa@labs:git/my-repo
     * [new branch]      master -> master
+
+We can also remove the machine from our local system:
+
+    $ cd ..
+    $ rm -rf my-repo
+
+And then re-clone it from the remote server:
+
+    $ labs git clone my-repo
+    Cloning into 'my-repo'...
+    Calling 'git clone varmaa@labs:git/my-repo --origin labs'...
+
+We can also delete the remote server's repository too:
+
+    $ labs git destroy my-repo
+    Running 'rm -rf git/my-repo' on varmaa@labs...
+    $ labs git list
