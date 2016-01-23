@@ -16,7 +16,12 @@ def proxy(local_port, remote_port=8080):
 
     print("You can now access localhost:%d at %s:%d." % (local_port, HOSTNAME,
                                                          remote_port))
-    ssh.tunnel(local_port=local_port, remote_port=remote_port)
+    print("Press Ctrl-C to exit.")
+
+    try:
+        ssh.tunnel(local_port=local_port, remote_port=remote_port)
+    except KeyboardInterrupt:
+        pass
 
 def update():
     '''
