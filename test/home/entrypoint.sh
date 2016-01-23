@@ -2,5 +2,6 @@
 
 source /root/.bashrc
 
-cd /labs && python setup.py develop > /var/log/labs-install.log && \
+cp -R /labs-ro /labs && cd /labs && \
+  python setup.py install > /var/log/labs-install.log && \
   cd /labs/test && $@

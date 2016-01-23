@@ -1,8 +1,8 @@
 home:
   build: ./test/home
   volumes:
-    - .:/labs
-  entrypoint: /labs/test/home/entrypoint.sh
+    - .:/labs-ro:ro
+  entrypoint: /labs-ro/test/home/entrypoint.sh
   links:
     - labs
 
