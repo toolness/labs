@@ -1,3 +1,4 @@
 *.pyc
 venv/
 *.egg-info
+doctest.py.txt
