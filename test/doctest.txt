@@ -1,0 +1,31 @@
+Let's assume that we're running on a laptop and are (rather unwisely)
+doing some coding as the root user.
+
+Let's make a repo!
+
+    >>> chdir('/root')
+    >>> mkdir('my-repo')
+    >>> chdir('my-repo')
+    >>> run('git init')
+    Initialized empty Git repository in /root/my-repo/.git/
+
+And add a file to it...
+
+    >>> run('printf "i am a file" > file.txt')
+    >>> run('git add file.txt')
+    >>> run('git commit -m "added file.txt"')
+    [master (root-commit) ...] added file.txt
+    1 file changed, 1 insertion(+)
+    create mode 100644 file.txt
+
+Now we'll use our `labs` command to list repos on the remote server.
+
+    >>> run('labs git list')
+
+Looks like there's nothing there right now. So we'll add our current repo.
+
+    >>> run('labs git create my-repo')
+    Initialized empty Git repository in /home/varmaa/git/my-repo/
+    Creating remote repository.
+    Running 'mkdir git/my-repo && git -C git/my-repo init --bare' on varmaa@labs...
+    Calling 'git remote add labs varmaa@labs:git/my-repo'...

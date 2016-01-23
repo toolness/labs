@@ -1,0 +1,11 @@
+home:
+  build: ./test/home
+  volumes:
+    - .:/labs
+  entrypoint: /labs/test/home/entrypoint.sh
+  links:
+    - labs
+
+labs:
+  build: ./test/labs
+  command: /usr/sbin/sshd -D -E /var/log/sshd.log
