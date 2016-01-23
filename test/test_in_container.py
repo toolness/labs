@@ -1,10 +1,14 @@
 import doctest
 import sys
 import os
-from subprocess import check_output, STDOUT
+from subprocess import check_output, STDOUT, CalledProcessError
 
 def run(cmdline):
-    sys.stdout.write(check_output(cmdline, stderr=STDOUT, shell=True))
+    try:
+        sys.stdout.write(check_output(cmdline, stderr=STDOUT, shell=True))
+    except CalledProcessError, e:
+        sys.stdout.write('Command %s failed:\n%s' % (repr(cmdline),
+                                                     e.output))
 
 def run_doctest(filename):
     (failure_count, test_count) = doctest.testfile(

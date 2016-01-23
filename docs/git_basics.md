@@ -1,3 +1,5 @@
+# Git Basics
+
 Let's assume that we're running on a laptop and are (rather unwisely)
 doing some coding as the root user.
 

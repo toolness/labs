@@ -11,6 +11,11 @@ PYDOCTEST_DIR = os.path.join(MY_DIR, 'pydoctests')
 if not os.path.exists(PYDOCTEST_DIR):
     os.mkdir(PYDOCTEST_DIR)
 
+def create_doctest_method(filename):
+    def test_method(self):
+        self.assertDoctestWorks(filename)
+    return test_method
+
 class DoctestTestCaseMeta(type):
     def __new__(cls, name, parents, dct):
         doctest_dir = dct['DOCTEST_DIR']
@@ -22,11 +27,8 @@ class DoctestTestCaseMeta(type):
         ]
 
         for filename in doctest_filenames:
-            def test_method(self):
-                self.assertDoctestWorks(filename)
-
             doctest_name = os.path.splitext(filename)[0]
-            dct['test_%s' % doctest_name] = test_method
+            dct['test_%s' % doctest_name] = create_doctest_method(filename)
         return super(DoctestTestCaseMeta, cls).__new__(cls, name,
                                                        parents, dct)
 
