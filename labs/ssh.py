@@ -13,3 +13,13 @@ def run(cmd, silent=False):
         SSH_TARGET,
         cmd
     ])
+
+def tunnel(local_port, remote_port, remote_bind_address=''):
+    d = locals()
+    subprocess.check_call([
+        'ssh',
+        '-R',
+        '%(remote_bind_address)s:%(remote_port)d:127.0.0.1:%(local_port)d' % d,
+        SSH_TARGET,
+        '-N'
+    ])
