@@ -10,7 +10,7 @@ exec(compile(open(INIT_PY).read(), INIT_PY, 'exec'))
 setup(
     name='toolness-labs',
     version=__version__,
-    description='Command-line tool for %s' % HOSTNAME,
+    description='Command-line tool for %s' % DEFAULT_HOSTNAME,
     author='Atul Varma',
     author_email='varmaa@gmail.com',
     license='MIT',
