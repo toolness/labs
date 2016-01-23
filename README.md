@@ -29,3 +29,11 @@ your virtualenv and then runs the tool within it.
 Note that you can avoid the virtualenv stuff entirely by simply
 installing the package globally, but this will also install all its
 dependencies globally too.
+
+## Running Tests
+
+To run the tests, run:
+
+```
+python -m unittest discover
+```
