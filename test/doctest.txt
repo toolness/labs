@@ -29,3 +29,13 @@ Looks like there's nothing there right now. So we'll add our current repo.
     Running 'mkdir git/my-repo && git -C git/my-repo init --bare' on
       varmaa@labs...
     Calling 'git remote add labs varmaa@labs:git/my-repo'...
+
+Now our new repo shows up on the remote server:
+
+    $ labs git list
+    my-repo
+
+Note that we haven't actually pushed anything there yet. We can do that
+via the git `labs` remote that was set up for us:
+
+    $ git push labs master
