@@ -47,5 +47,5 @@ It's also possible to run individual documentation tests. To test
 `docs/git_basics.md`, for instance, run:
 
 ```
-python -m unittest test.test_docs.Tests.test_git_basics
+python -m test.test_docs Tests.test_git_basics
 ```
