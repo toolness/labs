@@ -1,6 +1,6 @@
-def convert_to_pydoctest():
-    outfile = open('doctest.py.txt', 'w')
-    for line in open('doctest.txt'):
+def convert_to_pydoctest(src_file, dest_file):
+    outfile = open(dest_file, 'w')
+    for line in open(src_file):
         if line.startswith('    $ '):
             cmdline = line[6:].strip()
             if cmdline.startswith('cd '):
@@ -12,4 +12,6 @@ def convert_to_pydoctest():
         outfile.write(line)
 
 if __name__ == '__main__':
-    convert_to_pydoctest()
+    import sys
+
+    convert_to_pydoctest(*sys.argv[1:])
