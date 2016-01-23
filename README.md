@@ -30,10 +30,22 @@ Note that you can avoid the virtualenv stuff entirely by simply
 installing the package globally, but this will also install all its
 dependencies globally too.
 
+## Documentation
+
+Documentation can be found in the `docs` directory. It should be fairly
+accurate, as it also serves as the project's integration test suite.
+
 ## Running Tests
 
 To run the tests, run:
 
 ```
 python -m unittest discover
+```
+
+It's also possible to run individual documentation tests. To test
+`docs/git_basics.md`, for instance, run:
+
+```
+python -m unittest test.test_docs.Tests.test_git_basics
 ```
