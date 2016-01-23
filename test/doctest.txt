@@ -39,3 +39,5 @@ Note that we haven't actually pushed anything there yet. We can do that
 via the git `labs` remote that was set up for us:
 
     $ git push labs master
+    To varmaa@labs:git/my-repo
+    * [new branch]      master -> master

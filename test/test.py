@@ -1,10 +1,10 @@
 import doctest
 import sys
 import os
-from subprocess import check_output
+from subprocess import check_output, STDOUT
 
 def run(cmdline):
-    sys.stdout.write(check_output(cmdline, shell=True))
+    sys.stdout.write(check_output(cmdline, stderr=STDOUT, shell=True))
 
 def run_doctest():
     (failure_count, test_count) = doctest.testfile(
