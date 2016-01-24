@@ -12,7 +12,7 @@ def convert_lines(lines):
             line = "    >>> %s('%s')\n" % (funcname, cmdline)
         yield line
 
-def convert_to_pydoctest(src_file, dest_file):
+def convert_file(src_file, dest_file):
     outfile = open(dest_file, 'w')
     for line in convert_lines(open(src_file)):
         outfile.write(line)

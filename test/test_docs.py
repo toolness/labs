@@ -2,7 +2,7 @@ import os
 import unittest
 import subprocess
 
-from .pydoctest import convert_to_pydoctest
+from .shelltest.converter import convert_file
 
 MY_DIR = os.path.abspath(os.path.dirname(__file__))
 ROOT_DIR = os.path.normpath(os.path.join(MY_DIR, '..'))
@@ -49,11 +49,12 @@ class Tests(unittest.TestCase):
 
     def assertDoctestWorks(self, filename):
         pdt = '%s.pydoctest' % filename
-        convert_to_pydoctest(os.path.join(self.DOCTEST_DIR, filename),
-                             os.path.join(PYDOCTEST_DIR, pdt))
+        convert_file(os.path.join(self.DOCTEST_DIR, filename),
+                     os.path.join(PYDOCTEST_DIR, pdt))
         self.shell('docker-compose stop && docker-compose rm -f')
-        self.shell('docker-compose run home python '
-                   'test_in_container.py pydoctests/%s' % pdt)
+        self.shell('docker-compose run home '
+                   'python -m test.shelltest.runner '
+                   'test/pydoctests/%s' % pdt)
 
 if __name__ == '__main__':
     unittest.main()

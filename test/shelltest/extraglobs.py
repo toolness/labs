@@ -1,10 +1,9 @@
-import doctest
 import sys
-import os
 import subprocess
 import re
+import os
 
-def slugify(s):
+def _slugify(s):
     # http://stackoverflow.com/q/5574042/2422398
     slug = s.lower()
     slug = re.sub(r'[^a-z0-9]+', '-', slug).strip('-')
@@ -20,7 +19,7 @@ def run_in_background(cmdline):
     going to be torn down and rebuilt between tests.
     '''
 
-    logfile = open('/var/log/test/%s.log' % slugify(cmdline), 'w')
+    logfile = open('/var/log/test/%s.log' % _slugify(cmdline), 'w')
     popen = subprocess.Popen(
         cmdline,
         shell=True,
@@ -43,20 +42,3 @@ def run(cmdline):
         # would just pollute the test output.
         sys.stdout.write('Command %s failed:\n%s' % (repr(cmdline),
                                                      e.output))
-
-def run_doctest(filename):
-    (failure_count, test_count) = doctest.testfile(
-        filename,
-        optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE,
-        extraglobs=dict(
-            run=run,
-            run_in_background=run_in_background,
-            os=os
-        )
-    )
-    if failure_count == 0:
-        print "Test successful!"
-    sys.exit(failure_count)
-
-if __name__ == '__main__':
-    run_doctest(sys.argv[1])
