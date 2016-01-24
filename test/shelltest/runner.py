@@ -1,9 +1,21 @@
+'''
+    This module is responsible for running converted
+    shelltests.
+'''
+
 import doctest
 import sys
 
 from . import extraglobs
 
 def run_converted_shelltest(filename):
+    '''
+    Run the given converted shelltest.
+
+    It is assumed that this function is being run from
+    within a container.
+    '''
+
     (failure_count, test_count) = doctest.testfile(
         filename,
         module_relative=False,

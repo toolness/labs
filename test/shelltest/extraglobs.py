@@ -1,3 +1,8 @@
+'''
+    This module contains all the extra globals that
+    converted shelltests will have access to.
+'''
+
 import sys
 import subprocess
 import re

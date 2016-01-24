@@ -1,3 +1,8 @@
+'''
+    This module is responsible for converting shelltest
+    files to doctest files.
+'''
+
 def convert_lines(lines):
     for line in lines:
         if line.startswith('    $ '):
