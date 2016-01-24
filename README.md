@@ -40,6 +40,7 @@ accurate, as it also serves as the project's integration test suite.
 To run the tests, run:
 
 ```
+docker-compose build
 python -m unittest discover
 ```
 
