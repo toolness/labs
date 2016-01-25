@@ -1,9 +1,12 @@
 home:
-  build: ./test/home
+  build: .
+  dockerfile: ./test/home/Dockerfile
+  working_dir: /labs
+  entrypoint: /labs/test/home/entrypoint.sh
   volumes:
-    - .:/labs-ro:ro
+    - ./labs:/labs/labs:ro
     - ./test/log:/var/log/test
-  entrypoint: /labs-ro/test/home/entrypoint.sh
+    - ./test:/labs/test:ro
   links:
     - labs
 

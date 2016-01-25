@@ -9,8 +9,12 @@ RUN pip install argh
 RUN printf \
   'StrictHostKeyChecking=no\nLogLevel=ERROR\n' >> /etc/ssh/ssh_config
 
-COPY bashrc /root/.bashrc
-COPY id_rsa id_rsa.pub /root/.ssh/
+COPY test/home/bashrc /root/.bashrc
+COPY test/home/id_rsa test/home/id_rsa.pub /root/.ssh/
 RUN chmod 0700 /root/.ssh && chmod 0600 /root/.ssh/* && \
   git config --global user.email "root@example.com" && \
   git config --global user.name "Root"
+
+COPY setup.py /labs/
+COPY labs /labs/labs/
+RUN cd /labs && python setup.py develop
