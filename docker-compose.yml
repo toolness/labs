@@ -11,5 +11,8 @@ home:
     - labs
 
 labs:
-  build: ./test/labs
+  build: .
+  dockerfile: ./test/labs/Dockerfile
+  volumes:
+    - ./labs:/labs/labs:ro
   command: /usr/sbin/sshd -D -E /var/log/sshd.log
