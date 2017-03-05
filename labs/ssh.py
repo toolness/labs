@@ -23,3 +23,18 @@ def tunnel(local_port, remote_port, remote_bind_address=''):
         SSH_TARGET,
         '-N'
     ])
+
+def unix_socket_tunnel(local_port, socket_path):
+    d = locals()
+
+    # Note: Ensure that StreamLocalBindUnlink is set to 'yes' and
+    # StreamLocalBindMask is set appropriately on SSH_TARGET's
+    # sshd_config, or this might not work.
+
+    subprocess.check_call([
+        'ssh',
+        '-R',
+        '%(socket_path)s:127.0.0.1:%(local_port)d' % d,
+        SSH_TARGET,
+        '-N'
+    ])

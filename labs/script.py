@@ -2,7 +2,10 @@ import os
 import argparse
 import argh
 
-from . import HOSTNAME, git, ssh, local
+from . import (
+    HOSTNAME, HTTPS_TUNNEL_HOSTNAME, HTTPS_TUNNEL_PATH,
+    git, ssh, local
+)
 
 MY_DIR = os.path.abspath(os.path.dirname(__file__))
 ROOT_DIR = os.path.normpath(os.path.join(MY_DIR, '..'))
@@ -23,6 +26,24 @@ def proxy(local_port, remote_port=8080):
     except KeyboardInterrupt:
         pass
 
+@argh.arg('local_port', type=int, help='local port to forward requests to')
+def https_proxy(local_port):
+    '''
+    Make a local http server visible over https.
+    '''
+
+    print("You can now access localhost:%d at https://%s." % (
+        local_port,
+        HTTPS_TUNNEL_HOSTNAME,
+    ))
+    print("Press Ctrl-C to exit.")
+
+    try:
+        ssh.unix_socket_tunnel(local_port=local_port,
+                               socket_path=HTTPS_TUNNEL_PATH)
+    except KeyboardInterrupt:
+        pass
+
 def update():
     '''
     Update the CLI.
@@ -40,6 +61,6 @@ def main():
     parser = argparse.ArgumentParser(
         description='Tools for %s.' % ssh.HOSTNAME,
     )
-    argh.add_commands(parser, [update, proxy])
+    argh.add_commands(parser, [update, proxy, https_proxy])
     git.namespace.add_subcommands(parser)
     argh.dispatch(parser)
